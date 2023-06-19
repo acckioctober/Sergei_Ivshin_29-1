@@ -1,0 +1,17 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <h2>Список тортов:</h2>
+    <ul>
+        {% for cake in specific_cakes %}
+            <li>
+                <h3>{{ cake.name }}</h3>
+                <p>{{ cake.description }}</p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>В данный момент нет доступных тортов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

@@ -27,6 +27,10 @@ urlpatterns = [
     # path('goodbye/', views.goodbye),
     path('', views.main_page),
     path('pastries/', views.pastries_view),
+    path('cakes/', views.specific_cakes_view),
+    path('tastes/', views.specific_taste_view),
+    path('fillings/', views.specific_filling_view),
+    path('toppings/', views.specific_topping_view),
 ]
 
 if settings.DEBUG:

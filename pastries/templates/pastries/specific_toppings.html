@@ -1,0 +1,16 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <h2>Список украшений:</h2>
+    <ul>
+        {% for topping in specific_toppings %}
+            <li>
+                <h3>{{ topping.name }}</h3>
+                <p>{{ topping.description }}</p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>В данный момент нет доступных украшений.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

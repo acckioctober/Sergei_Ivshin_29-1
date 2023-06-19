@@ -1,0 +1,16 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <h2>Список вкусов:</h2>
+    <ul>
+        {% for taste in specific_tastes %}
+            <li>
+                <h3>{{ taste.name }}</h3>
+                <p>{{ taste.description }}</p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>В данный момент нет доступных вкусов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

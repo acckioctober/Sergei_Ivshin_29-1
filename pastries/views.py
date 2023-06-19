@@ -1,34 +1,10 @@
-from django.http import HttpResponse
-from datetime import datetime
 from django.shortcuts import render
-from pastries.models import Cake
+from pastries.models import Cake, Taste, Filling, Topping
 
-# def hello(request):
-#     if request.method == "GET":
-#         return HttpResponse("Hello! It's my pastries project")
-#
-#
-# def now_date(request):
-#     if request.method == "GET":
-#         now = datetime.now()
-#         return HttpResponse("Current date and time: " + now.strftime("%Y-%m-%d %H:%M:%S"))
-#
-#
-# def goodbye(request):
-#     if request.method == "GET":
-#         return HttpResponse("Goodbye dear user!")
 
 def main_page(request):
     if request.method == "GET":
         return render(request, "layouts/index.html")
-
-# def pastries_view(request):
-#     if request.method == "GET":
-#         cakes = Cake.objects.all()
-#         context_data = {
-#             "cakes": cakes
-#         }
-#         return render(request, "pastries/pastries.html", context=context_data)
 
 
 def pastries_view(request):
@@ -44,3 +20,41 @@ def pastries_view(request):
                 'toppings': toppings,
             })
         return render(request, "pastries/pastries.html", {'cakes_data': cakes_data})
+
+
+def specific_cakes_view(request):
+    if request.method == "GET":
+        cake_names = Cake.objects.values_list('name', flat=True).distinct()
+        specific_cakes = Cake.objects.filter(name__in=cake_names)
+        context_data = {
+            "specific_cakes": specific_cakes
+        }
+        return render(request, "pastries/specific_cakes.html", context=context_data)
+
+
+def specific_taste_view(request):
+    if request.method == "GET":
+        taste_names = Taste.objects.values_list('name', flat=True).distinct()
+        specific_tastes = Taste.objects.filter(name__in=taste_names)
+        context_data = {
+            "specific_tastes": specific_tastes
+        }
+        return render(request, "pastries/specific_tastes.html", context=context_data)
+
+def specific_filling_view(request):
+    if request.method == "GET":
+        filling_names = Filling.objects.values_list('name', flat=True).distinct()
+        specific_fillings = Filling.objects.filter(name__in=filling_names)
+        context_data = {
+            "specific_fillings": specific_fillings
+        }
+        return render(request, "pastries/specific_fillings.html", context=context_data)
+
+def specific_topping_view(request):
+    if request.method == "GET":
+        topping_names = Topping.objects.values_list('name', flat=True).distinct()
+        specific_toppings = Topping.objects.filter(name__in=topping_names)
+        context_data = {
+            "specific_toppings": specific_toppings
+        }
+        return render(request, "pastries/specific_toppings.html", context=context_data)

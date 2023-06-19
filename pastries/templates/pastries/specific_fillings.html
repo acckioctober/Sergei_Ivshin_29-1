@@ -1,0 +1,16 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <h2>Список начинок:</h2>
+    <ul>
+        {% for filling in specific_fillings %}
+            <li>
+                <h3>{{ filling.name }}</h3>
+                <p>{{ filling.description }}</p>
+                <hr>
+            </li>
+        {% empty %}
+            <li>В данный момент нет доступных начинок.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
