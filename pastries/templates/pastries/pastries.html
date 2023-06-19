@@ -1,0 +1,25 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <div class="cakes d-flex flex-wrap justify-content-center"> <!--добавлены классы для выравнивания карточек и переноса на новую строку при нехватке места-->
+        {% for data in cakes_data %}
+            <div class="card m-2" style="width: 18rem;"> <!--добавлен класс m-2 для отступов-->
+              <img src="{{ data.cake.image.url }}" class="card-img-top" alt="{{ data.cake.name }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ data.cake.name }}</h5>
+                <p class="card-text">{{ data.cake.description }}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Вкус: {{ data.cake.taste.name }}</li>
+                <li class="list-group-item">Начинка: {{ data.fillings }}</li>
+                <li class="list-group-item">Украшение: {{ data.toppings }}</li>
+              </ul>
+              <div class="card-body">
+                <p class="card-text"><strong>Цена: {{ data.cake.price }} Руб.</strong></p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
