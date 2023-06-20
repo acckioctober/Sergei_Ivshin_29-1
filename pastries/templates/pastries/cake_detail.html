@@ -1,0 +1,37 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <div class="card" style="width: 40rem;">
+        <!-- Путь к изображению будет зависеть от настроек MEDIA_URL вашего проекта -->
+        <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ cake.name }}</h5>
+            <p class="card-text">{{ cake.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <!-- Перечисляем вкусы торта -->
+            <li class="list-group-item"><strong>Вкус:</strong> <strong>{{ cake.taste.name }}</strong><br><small>{{ cake.taste.description }}</small></li>
+            <!-- Перечисляем начинки -->
+            <li class="list-group-item">
+                <strong>Начинки:</strong>
+                {% for filling in cake.fillings.all %}
+                    <span><strong>{{ filling.name }}</strong>- {{ filling.description }}</span>{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            </li>
+            <!-- Перечисляем топпинги -->
+            <li class="list-group-item">
+                <strong>Декор украшение:</strong>
+                {% for topping in cake.toppings.all %}
+                    <span><strong>{{ topping.name }}</strong> - {{ topping.description }}</span>{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            </li>
+            <!-- Перечисляем цену -->
+            <li class="list-group-item"><strong>Цена: {{ cake.price }} Руб.</strong></li>
+        </ul>
+        <div class="card-body">
+            <!-- Тут можно вставить ссылки, если они нужны -->
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+{% endblock %}

@@ -31,6 +31,7 @@ urlpatterns = [
     path('tastes/', views.specific_taste_view),
     path('fillings/', views.specific_filling_view),
     path('toppings/', views.specific_topping_view),
+    path('cakes/<int:cake_id>/', views.cake_detail),
 ]
 
 if settings.DEBUG:

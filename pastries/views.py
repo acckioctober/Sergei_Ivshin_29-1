@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from pastries.models import Cake, Taste, Filling, Topping
 
 
@@ -20,6 +20,12 @@ def pastries_view(request):
                 'toppings': toppings,
             })
         return render(request, "pastries/pastries.html", {'cakes_data': cakes_data})
+
+
+def cake_detail(request, cake_id):
+    if request.method == "GET":
+        cake = get_object_or_404(Cake, id=cake_id)
+        return render(request, 'pastries/cake_detail.html', {'cake': cake})
 
 
 def specific_cakes_view(request):
