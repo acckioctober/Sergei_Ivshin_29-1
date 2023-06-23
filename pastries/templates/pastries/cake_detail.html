@@ -3,14 +3,16 @@
 {% block content %}
     <div class="card" style="width: 40rem;">
         <!-- Путь к изображению будет зависеть от настроек MEDIA_URL вашего проекта -->
-        <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
+         {% if cake.image %}
+            <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
+        {% endif %}
         <div class="card-body">
-            <h5 class="card-title">{{ cake.name }}</h5>
-            <p class="card-text">{{ cake.description }}</p>
+            <h5 class="card-title">{{ cake.cake_type }}</h5>
+            <p class="card-text">{{ cake.cake_type.description }}</p>
         </div>
         <ul class="list-group list-group-flush">
             <!-- Перечисляем вкусы торта -->
-            <li class="list-group-item"><strong>Вкус:</strong> <strong>{{ cake.taste.name }}</strong><br><small>{{ cake.taste.description }}</small></li>
+            <li class="list-group-item"><strong>Вкус:</strong> <strong>{{ cake.taste.name }}</strong><br>{{ cake.taste.description }}</li>
             <!-- Перечисляем начинки -->
             <li class="list-group-item">
                 <strong>Начинки:</strong>
@@ -25,6 +27,8 @@
                     <span><strong>{{ topping.name }}</strong> - {{ topping.description }}</span>{% if not forloop.last %},{% endif %}
                 {% endfor %}
             </li>
+            <!-- Вывод поля веса -->
+            <li class="list-group-item"><strong>Вес: {{ cake.weight }} кг</strong></li>
             <!-- Перечисляем цену -->
             <li class="list-group-item"><strong>Цена: {{ cake.price }} Руб.</strong></li>
         </ul>

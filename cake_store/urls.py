@@ -32,6 +32,9 @@ urlpatterns = [
     path('fillings/', views.specific_filling_view),
     path('toppings/', views.specific_topping_view),
     path('cakes/<int:cake_id>/', views.cake_detail),
+    path('create/', views.cake_create_view),
+    path('event/', views.event_create_view),
+    path('events/', views.list_event_view),
 ]
 
 if settings.DEBUG:

@@ -1,13 +1,14 @@
 from django.contrib import admin
-from pastries.models import Cake, Taste, Filling, Topping
+from pastries.models import Cake, Taste, Filling, Topping, CakeType
 from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
 
-# admin.site.register(Cake)
+admin.site.register(CakeType)
 admin.site.register(Taste)
 admin.site.register(Filling)
 admin.site.register(Topping)
+
 
 
 class CakeAdminForm(forms.ModelForm):

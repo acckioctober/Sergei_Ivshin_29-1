@@ -1,17 +1,18 @@
 {% extends 'layouts/index.html' %}
-
 {% block content %}
     <!-- Удален класс justify-content-center для выравнивания контента по левому краю -->
     <div class="cakes d-flex flex-wrap">
         {% for data in cakes_data %}
             <div class="card m-2" style="width: 18rem;"> <!--добавлен класс m-2 для отступов-->
               <div class="card-body">
-                <h5 class="card-title">{{ data.cake.name }}</h5>
+                <h5 class="card-title">{{ data.cake.cake_type }}</h5>
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Вкус: {{ data.cake.taste.name }}</li>
                 <li class="list-group-item">Начинка: {{ data.fillings }}</li>
                 <li class="list-group-item">Декор украшение: {{ data.toppings }}</li>
+                <!-- Вывод поля веса -->
+                <li class="list-group-item"><strong>Вес: {{ data.cake.weight }} кг</strong></li>
               </ul>
               <div class="card-body">
                 <p class="card-text"><strong>Цена: {{ data.cake.price }} Руб.</strong></p>

@@ -1,0 +1,18 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+  <h1>Мои события</h1>
+  {% for event in events %}
+      <h2>{{ event.name }}</h2>
+      <p>{{ event.description }}</p>
+      <p>Дата: {{ event.date }}</p>
+      <h3>Торты:</h3>
+      <ul>
+          {% for cake in event.cakes.all %}
+              <li>{{ cake.cake_type }}</li>
+          {% endfor %}
+      </ul>
+  {% empty %}
+      <p>У вас пока нет событий.</p>
+  {% endfor %}
+{% endblock %}

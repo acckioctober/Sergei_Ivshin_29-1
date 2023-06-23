@@ -1,0 +1,10 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <h2>Создание события:</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать событие</button>
+    </form>
+{% endblock %}

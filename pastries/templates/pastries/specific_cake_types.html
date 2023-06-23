@@ -3,10 +3,10 @@
 {% block content %}
     <h2>Список тортов:</h2>
     <ul>
-        {% for cake in specific_cakes %}
+        {% for cake_type in specific_cake_types %}
             <li>
-                <h3>{{ cake.name }}</h3>
-                <p>{{ cake.description }}</p>
+                <h3>{{ cake_type.name }}</h3>
+                <p>{{ cake_type.description }}</p>
                 <hr>
             </li>
         {% empty %}
