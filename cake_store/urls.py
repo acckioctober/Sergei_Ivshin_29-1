@@ -19,6 +19,7 @@ from django.urls import path
 from pastries import views
 from django.conf import settings
 from django.conf.urls.static import static
+from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +36,9 @@ urlpatterns = [
     path('create/', views.cake_create_view),
     path('event/', views.event_create_view),
     path('events/', views.list_event_view),
+    path('users/register/', user_views.register_user_view),
+    path('users/login/', user_views.login_user_view),
+    path('users/logout/', user_views.logout_user_view),
 ]
 
 if settings.DEBUG:

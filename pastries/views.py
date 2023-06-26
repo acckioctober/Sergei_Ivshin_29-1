@@ -1,10 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from pastries.models import Cake, Taste, Filling, Topping, CakeType, Event
 from pastries.forms import CakeCreateForm, EventCreateForm
-from django.http import JsonResponse
-from django.views import View
-from django.core import serializers
-
+from django.contrib.auth.decorators import login_required
 
 def main_page(request):
     if request.method == "GET":
@@ -22,6 +19,7 @@ def pastries_view(request):
                 'cake': cake,
                 'fillings': fillings,
                 'toppings': toppings,
+                'user': request.user,
             })
         return render(request, "pastries/pastries.html", {'cakes_data': cakes_data})
 
@@ -68,7 +66,7 @@ def specific_topping_view(request):
         }
         return render(request, "pastries/specific_toppings.html", context=context_data)
 
-
+@login_required
 def cake_create_view(request):
     if request.method == "GET":
         context_data = {
@@ -87,12 +85,12 @@ def cake_create_view(request):
             return redirect("/pastries/")
         return render(request, "pastries/cake_create_form.html", {"form": form})
 
-
+@login_required
 def list_event_view(request):
     events = Event.objects.filter(user=request.user)
     return render(request, 'pastries/events.html', {'events': events})
 
-
+@login_required
 def event_create_view(request):
     if request.method == "GET":
         context_data = {
