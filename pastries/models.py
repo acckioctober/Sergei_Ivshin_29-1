@@ -5,6 +5,9 @@ class CakeType(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     available = models.BooleanField(default=True)
+    class Meta:
+        verbose_name = 'Тип торта'
+        verbose_name_plural = 'Типы тортов'
 
     def __str__(self):
         return self.name
@@ -13,6 +16,9 @@ class Taste(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     available = models.BooleanField(default=True)
+    class Meta:
+        verbose_name = 'Вкус'
+        verbose_name_plural = 'Вкусы'
 
     def __str__(self):
         return self.name
@@ -24,6 +30,9 @@ class Filling(models.Model):
     available = models.BooleanField(default=True)
     cake_types = models.ManyToManyField(CakeType, blank=True)
     tastes = models.ManyToManyField(Taste, blank=True)
+    class Meta:
+        verbose_name = 'Начинка'
+        verbose_name_plural = 'Начинки'
 
     def __str__(self):
         return self.name
@@ -34,6 +43,9 @@ class Topping(models.Model):
     available = models.BooleanField(default=True)
     cake_types = models.ManyToManyField(CakeType, blank=True)
     tastes = models.ManyToManyField(Taste, blank=True)
+    class Meta:
+        verbose_name = 'Топпинг'
+        verbose_name_plural = 'Топпинги'
 
     def __str__(self):
         return self.name
@@ -49,6 +61,9 @@ class Cake(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     available = models.BooleanField(default=True)
     add_info = models.TextField(blank=True, null=True)  # новое поле
+    class Meta:
+        verbose_name = 'Торт'
+        verbose_name_plural = 'Торты'
 
     def __str__(self):
         return self.cake_type.name + ' ' + self.taste.name + ' ' + str(self.weight) + ' кг'

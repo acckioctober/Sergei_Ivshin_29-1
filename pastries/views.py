@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from pastries.models import Cake, Taste, Filling, Topping, CakeType, Event
 from pastries.forms import CakeCreateForm, EventCreateForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.db.models.functions import Lower
+from pastries.constants import PAGINATION_LIMIT
+import math
 
 def main_page(request):
     if request.method == "GET":
@@ -11,6 +15,22 @@ def main_page(request):
 def pastries_view(request):
     if request.method == "GET":
         cakes = Cake.objects.all()
+        search_query = request.GET.get('q', '')  # Получаем поисковый запрос, если он есть, иначе - пустая строка
+        if search_query:
+            cakes = cakes.annotate(
+                lower_cake_type_name=Lower('cake_type__name'),
+                lower_cake_type_description=Lower('cake_type__description'),
+                lower_taste_name=Lower('taste__name'),
+                lower_taste_description=Lower('taste__description'),
+            ).filter(
+                Q(lower_cake_type_name__contains=search_query.lower()) |
+                Q(lower_cake_type_description__contains=search_query.lower()) |
+                Q(lower_taste_name__contains=search_query.lower()) |
+                Q(lower_taste_description__contains=search_query.lower())
+            ).distinct()
+        page = int(request.GET.get('page', 1))
+        max_page = math.ceil(cakes.count() / PAGINATION_LIMIT)
+        cakes = cakes[(page - 1) * PAGINATION_LIMIT:page * PAGINATION_LIMIT]
         cakes_data = []
         for cake in cakes:
             fillings = ", ".join([filling.name for filling in cake.fillings.all()])
@@ -21,7 +41,8 @@ def pastries_view(request):
                 'toppings': toppings,
                 'user': request.user,
             })
-        return render(request, "pastries/pastries.html", {'cakes_data': cakes_data})
+        pages = range(1, max_page + 1)
+        return render(request, "pastries/pastries.html", {'cakes_data': cakes_data, 'pages': pages})
 
 
 def cake_detail(request, cake_id):

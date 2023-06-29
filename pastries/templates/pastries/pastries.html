@@ -1,11 +1,14 @@
 {% extends 'layouts/index.html' %}
 {% block content %}
-    <!-- Удален класс justify-content-center для выравнивания контента по левому краю -->
+    <form class="form-inline my-2 my-lg-0" method="GET" action="/pastries/">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
     <div class="cakes d-flex flex-wrap">
         {% for data in cakes_data %}
             <div class="card m-2" style="width: 18rem;"> <!--добавлен класс m-2 для отступов-->
               <div class="card-body">
-                <h5 class="card-title">{{ data.cake.cake_type }}</h5>
+                <h5 class="card-title">{{ data.cake.cake_type|capfirst }}</h5>
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Вкус: {{ data.cake.taste.name }}</li>
@@ -20,6 +23,13 @@
                   <a href="#" class="card-link">Another link</a>
               </div>
             </div>
+        {% endfor %}
+    </div>
+    <div class="pages">
+        {% for page in pages %}
+            <a href= "/pastries/?page={{ page }}">
+                <button> {{ page }} </button>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}

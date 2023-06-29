@@ -7,12 +7,12 @@
             <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}">
         {% endif %}
         <div class="card-body">
-            <h5 class="card-title">{{ cake.cake_type }}</h5>
-            <p class="card-text">{{ cake.cake_type.description }}</p>
+            <h5 class="card-title">{{ cake.cake_type|capfirst }}</h5>
+            <p class="card-text">{{ cake.cake_type.description|capfirst }}</p>
         </div>
         <ul class="list-group list-group-flush">
             <!-- Перечисляем вкусы торта -->
-            <li class="list-group-item"><strong>Вкус:</strong> <strong>{{ cake.taste.name }}</strong><br>{{ cake.taste.description }}</li>
+            <li class="list-group-item"><strong>Вкус:</strong> <strong>{{ cake.taste.name }}</strong><br>{{ cake.taste.description|capfirst }}</li>
             <!-- Перечисляем начинки -->
             <li class="list-group-item">
                 <strong>Начинки:</strong>
