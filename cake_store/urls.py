@@ -20,25 +20,26 @@ from pastries import views
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('hello/', views.hello),
     # path('now_date/', views.now_date),
     # path('goodbye/', views.goodbye),
-    path('', views.main_page),
-    path('pastries/', views.pastries_view),
-    path('cakes/', views.specific_cakes_view),
-    path('tastes/', views.specific_taste_view),
-    path('fillings/', views.specific_filling_view),
-    path('toppings/', views.specific_topping_view),
-    path('cakes/<int:cake_id>/', views.cake_detail),
-    path('create/', views.cake_create_view),
-    path('event/', views.event_create_view),
-    path('events/', views.list_event_view),
-    path('users/register/', user_views.register_user_view),
-    path('users/login/', user_views.login_user_view),
-    path('users/logout/', user_views.logout_user_view),
+    path('', views.MainPageCBV.as_view()),
+    path('pastries/', views.PastriesCBV.as_view(), name='pastries'),
+    path('cakes/', views.SpecificCakesCBV.as_view()),
+    path('tastes/', views.SpecificTasteCBV.as_view()),
+    path('fillings/', views.SpecificFillingCBV.as_view()),
+    path('toppings/', views.SpecificToppingCBV.as_view()),
+    path('cakes/<int:cake_id>/', views.CakeDetailCBV.as_view()),
+    path('create/', views.CakeCreateCBV.as_view()),
+    path('event/', views.EventCreateCBV.as_view()),
+    path('events/', views.EventListCBV.as_view(), name='events'),
+    path('users/register/', user_views.RegisterUserCBV.as_view(), name='register'),
+    path('users/login/', user_views.UserLoginCBV.as_view(), name='login'),
+    path('users/logout/', user_views.UserLogoutCBV.as_view(), name='logout'),
 ]
 
 if settings.DEBUG:
